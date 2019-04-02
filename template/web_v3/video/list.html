@@ -1,0 +1,121 @@
+{template '_header'}
+<style type="text/css">
+	table th,td{text-align: center;}
+</style>
+<div class="page-content"> 
+<form action="" method="get"> 
+<input type="hidden" name="c" value="site" /> 
+<input type="hidden" name="a" value="entry" /> 
+<input type="hidden" name="m" value="ewei_shopv2" /> 
+<input type="hidden" name="do" value="web" /> 
+<input type="hidden" name="r" value="info.video" /> 
+<div class="page-toolbar"> 
+ <div class="col-sm-6"> 
+  <a class="btn btn-primary btn-sm" href="{php echo webUrl('info.video.add')}"><i class="fa fa-plus"></i> 添加视频</a> 
+ </div> 
+ <div class="col-sm-6 pull-right"> 
+  <div class="input-group">
+  	 
+   <input type="text" class="input-sm form-control" name="keyword" value="{$keyword}" placeholder="视频名称" /> 
+   <span class="input-group-btn"> <button class="btn btn-primary" type="submit"> 搜索</button> </span> 
+  </div> 
+ </div> 
+</div> 
+</form>
+{if count($video)>0} 
+<div class="page-table-header"> 
+<input type="checkbox" /> 
+<div class="btn-group"> 
+ <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle='batch' data-href="{php echo webUrl('info/video/enabled',array('enabled'=>1))}">
+ <i class='icow icow-xianshi'></i> 显示</button>
+ <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle="batch" data-href="{php echo webUrl('info/video/enabled',array('enabled'=>'0'))}"> <i class="icow icow-jinyong"></i> 禁用 </button>
+ <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle="batch-remove" data-confirm="确认要删除?" data-href="{php echo webUrl('info/video/delete',array('enabled'=>'0','id'=>$v['id']))}" disabled="disabled"> <i class="icow icow-shanchu1"></i> 删除 </button> 
+</div> 
+</div> 
+<table class="table table-hover table-responsive"> 
+<thead> 
+ <tr> 
+  <th style="width:25px;"></th>
+  <th style="width:50px;">顺序</th> 
+  <th style="width:125px">视频名称</th>
+  <th style="width:125px">封面</th>
+  <th style="width:125px;">发布状态</th>
+  <th style="width:125px;">上传时间</th>
+  <th style="width:125px;">发布时间</th>
+  <th style="width:125px;">操作</th>
+ </tr> 
+</thead> 
+<tbody>
+{loop $video $k $v}
+ <tr>
+	<td> <input type="checkbox" value="{$v['id']}" name="id" /> </td>
+  <td title="点击修改排序">
+      {ifp 'train.course.edit'}
+        <a href='javascript:;' data-toggle='ajaxEdit' data-href="{php echo webUrl('info/video/displayorder',array('id'=>$v['id']))}" >{$v['displayorder']}</a>
+      {else}
+        {$v['displayorder']} 
+      {/if}
+  </td>
+	<td>
+      {$v['video_name']}
+  </td>
+  <td>
+    <img src="{php echo tomedia($v['thumb'])}" style="width:70px;height:70px;border:1px solid #efefef; padding:1px;">
+  </td>
+  <td>
+    <span class='label {if $v['enabled']==1}label-primary{else}label-default{/if}'
+      {ifp 'info.video.edit'}
+          data-toggle='ajaxSwitch'
+          data-switch-value='{$v['enabled']}'
+          data-switch-value0='1|已发布|label label-primary|{php echo webUrl('info/video/enabled',array('enabled'=>'0','id'=>$v['id']))}'
+          data-switch-value1='0|未发布|label label-default|{php echo webUrl('info/video/enabled',array('enabled'=>'1','id'=>$v['id']))}'
+      {/if} title="点击发布">
+      {if $v['enabled']==1}已发布{else}未发布{/if}
+    </span>
+  </td>
+  <td>
+    {if empty($v['upload_time'])}无{else}{php echo date('Y-m-d H:i:s',$v['upload_time'])}{/if}
+  </td>
+  <td>
+    {ifp empty($v['cate_name'])}无{else}{$v['cate_name']}{/if}
+  </td>
+	<td> 
+	  	<a class="btn btn-default btn-sm btn-op btn-operation" href="{php echo webUrl('info/video/edit',array('id'=>$v['id']))}"> 
+	  		<span data-toggle="tooltip" data-placement="top" title="" data-original-title="编辑"> <i class="icow icow-bianji2"></i> </span> 
+	  	</a> 
+	  	<a class="btn btn-default  btn-sm btn-op btn-operation" data-toggle="ajaxRemove" href="{php echo webUrl('info/video/delete',array('id'=>$v['id']))}" data-confirm="确认删除此视频吗？"> 
+	  		<span data-toggle="tooltip" data-placement="top" title="" data-original-title="删除"> 
+	  			<i class="icow icow-shanchu1"></i> 
+	  		</span> 
+	  	</a> 
+	</td> 
+ </tr>
+{/loop}
+</tbody> 
+<tfoot> 
+ <tr> 
+  <td><input type="checkbox" /></td> 
+  <td colspan="2"> 
+   <div class="btn-group" style="float: left;"> 
+    <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle="batch" data-href="{php echo webUrl('info/video/enabled',array('enabled'=>1))}" disabled="disabled"> <i class="icow icow-qiyong"></i> 启用 </button> 
+    <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle="batch" data-href="{php echo webUrl('info/video/enabled',array('enabled'=>0))}" disabled="disabled"> <i class="icow icow-jinyong"></i> 禁用 </button>
+    <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle="batch-remove" data-confirm="确认要删除?" data-href="{php echo webUrl('info/video/delete')}" disabled="disabled"> <i class="icow icow-shanchu1"></i> 删除 </button> 
+   </div> 
+  </td> 
+  <td colspan="5" class="text-right"> 
+   <div>
+    <ul class="pagination pagination-centered">
+     <li><span class="nobg">{$pager}</span></li>
+    </ul>
+   </div>
+  </td> 
+ </tr> 
+</tfoot> 
+</table>
+{else}
+<div class="panel panel-default">
+    <div class="panel-body empty-data">暂时没有视频!</div>
+</div>
+{/if} 
+</div>
+{template '_footer'}

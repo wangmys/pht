@@ -1,0 +1,117 @@
+{template '_header'}
+<div class='fui-page  fui-page-current'>
+    <div class="fui-header">
+		<div class="fui-header-left">
+			<a class="back" onclick='location.back()'></a>
+		</div>
+		<div class="title">{if !empty($bind)}更换绑定手机号{else}绑定手机号{/if}</div>
+		<div class="fui-header-right">&nbsp;</div>
+	</div>
+
+	<div class='fui-content' style='margin-top:5px;'>
+
+		<div class="fui-cell-group">
+
+			<div class="fui-cell must">
+				<div class="fui-cell-label">手机号</div>
+				<div class="fui-cell-info"><input type="tel" class='fui-input' id='mobile' name='mobile' placeholder="请输入您的手机号"  value="{$member['mobile']}" maxlength="11" /></div>
+			</div>
+
+			<div class="fui-cell must">
+				<div class="fui-cell-label">验证码</div>
+				<div class="fui-cell-info"><input type="tel" class='fui-input' id='verifycode' name='verifycode' placeholder="5位验证码"  value="" maxlength="5" /></div>
+				<div class="fui-cell-remark noremark"><a class="btn btn-default btn-default-o btn-sm" id="btnCode">获取验证码</a></div>
+			</div>
+<!-- 			<div class="fui-cell must">
+				<div class="fui-cell-label">登录密码</div>
+				<div class="fui-cell-info"><input type="password" class='fui-input' id='pwd' name='pwd' placeholder="请输入您的登录密码"  value="" /></div>
+			</div>
+			<div class="fui-cell must">
+				<div class="fui-cell-label">确认密码</div>
+				<div class="fui-cell-info"><input type="password" class='fui-input' id='pwd1' name='pwd1' placeholder="请输入确认登录密码"  value="" /></div>
+			</div> -->
+		</div>
+		<a href='#' id='bindsubmit' class='btn btn-success block' onclick='return false;'>立即绑定</a>
+	</div>
+	<script type="text/javascript">
+	$('#bindsubmit').click(function() {
+            if ($('#bindsubmit').attr('stop')) {
+                return
+            }
+            if (!$('#mobile').isMobile()) {
+                FoxUI.toast.show('请输入11位手机号码');
+                return
+            }
+            if (!$('#verifycode').isInt() || $('#verifycode').len() != 5) {
+                FoxUI.toast.show('请输入5位数字验证码');
+                return
+            }
+            // if ($('#pwd').isEmpty()) {
+            //     FoxUI.toast.show('请输入登录密码');
+            //     return
+            // }
+            // if ($('#pwd1').isEmpty()) {
+            //     FoxUI.toast.show('请重复输入密码');
+            //     return
+            // }
+            // if ($('#pwd').val() !== $('#pwd1').val()) {
+            //     FoxUI.toast.show('两次密码输入不一致');
+            //     return
+            // }
+            $('#bindsubmit').html('正在绑定...').attr('stop', 1);
+            $.post("{php echo mobileUrl('info/bind','',true)}", {
+                mobile: $('#mobile').val(),
+                verifycode: $('#verifycode').val(),
+                // pwd: $('#pwd').val()
+            }, function(b) {
+            	if (b.status == '1') {
+                    alert("绑定成功！");
+                	window.location.href = "{php echo mobileUrl('info/info')}";
+                    return
+                }
+                if (b.status == 0) {
+                    FoxUI.toast.show(b.result.message);
+                    $('#bindsubmit').html('立即绑定').removeAttr('stop');
+                    return
+                }
+                if (b.status < 0) {
+                    confirm(b.result.message, "注意", function() {
+                        $.post("{php echo mobileUrl('info/bind','',true)}", {
+                            mobile: $('#mobile').val(),
+                            verifycode: $('#verifycode').val(),
+                            pwd: $('#pwd').val(),
+                            confirm: 1
+                        }, function(a) {
+                            if (a.status == 1) {
+                                alert("绑定成功！");
+                                location.href = "{php echo mobileUrl('info/info')}";
+                                return
+                            }
+                            FoxUI.toast.show(a.result.message);
+                            $('#bindsubmit').html('立即绑定').removeAttr('stop');
+                            return
+                        }, 'json')
+                    }, function() {
+                        $('#bindsubmit').html('立即绑定').removeAttr('stop')
+                    });
+                    return
+                }
+                alert("绑定成功！");
+                window.location.href = "{php echo mobileUrl('info/info')}";
+            }, 'json')
+        });
+</script>
+	<script language='javascript'>
+		require(['biz/member/register'], function (modal) {
+		  	modal.initBind({
+				endtime: {php echo intval($endtime)},
+				backurl: "{$_GPC['backurl']}"
+			});
+		});
+</script>
+
+</div>
+{template '_footer'}
+
+
+<!--efwww_com-->

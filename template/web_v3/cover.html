@@ -1,0 +1,20 @@
+{template '_header'}
+<div class="page-header">当前位置：<span class="text-primary">信息收集入口设置</span></div>
+<div class="page-content">
+   <div class="form-group">
+        <label class="col-lg control-label">直接链接</label>
+        <div class="col-sm-9 col-xs-12">
+            <p class='form-control-static'>
+                <a href='javascript:;' class="js-clip" title='点击复制链接' data-url="{php echo mobileUrl('info.info.user',array(),true)}" >
+                   {php echo mobileUrl('info.info.user',array(),true)}
+                </a>
+                <span style="cursor: pointer;" data-toggle="popover" data-trigger="hover" data-html="true"
+                      data-content="<img src='{$infoQrcode}' width='130' alt='链接二维码'>" data-placement="auto right">
+                    <i class="glyphicon glyphicon-qrcode"></i>
+                </span>
+            </p>
+        </div>
+    </div>
+</div>
+{template '_footer'}
+<!--yifuyuanma-->

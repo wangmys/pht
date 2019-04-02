@@ -1,0 +1,160 @@
+{template '_header'}
+    <link rel="stylesheet" href="../addons/ewei_shopv2/plugin/info/static/swipe/css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="../addons/ewei_shopv2/plugin/info/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../addons/ewei_shopv2/plugin/info/static/css/balance.css">
+    <style>
+    	.fui-page, .fui-page-group{background-color: #fff;}
+    </style>
+    <div class='fui-page-group statusbar'>
+        <div class="fui-page">
+            <div class="fui-content">
+                <div class="user-header">
+                    <img src="../addons/ewei_shopv2/plugin/info/static/img/user-header.png" alt="" width="100%">
+                    <div class="user-info">
+                        <img src="{$member['avatar']}" alt="">
+                        <div>
+                            <div>{$member['nickname']}</div>
+                            <div>ID:{$member['id']}</div>
+                        </div>
+                        <i class="fa fa-cog" id="set" aria-hidden="true"  onclick="location.href='{php echo mobileUrl('info/info')}'"></i>
+                    </div>
+                </div>
+                <div class="ba-container">
+                    <div class="ba-title">公司介绍</div>
+                    <div class="swiper-container" id="swiper1">
+                        <div class="swiper-wrapper">
+                            {loop $introduce $v}
+                            <div class="swiper-slide"><img src="{php echo tomedia($v['thumb'])}" data-url="{$v['link']}" alt="" width="100%"></div>
+                            {/loop}
+                        </div>
+                        <!-- 如果需要分页器 -->
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    <div class="text-right"><a href="http://s100.1.y01.cn/app/index.php?i=4&c=entry&m=ewei_shopv2&do=mobile&r=article&aid=174" class="btn btn-ba" style="color: #0d7fd3;">查看详情</a> </div>
+                </div>
+                <div class="ba-container">
+                    <div class="ba-title">产品介绍</div>
+                    <div class="swiper-container" id="swiper2">
+                        <div class="swiper-wrapper">
+                            {loop $product $val}
+                                <div class="swiper-slide"><img src="{php echo tomedia($val['thumb'])}" data-url="{$v['link']}" alt="" width="100%"></div>
+                            {/loop}
+                        </div>
+                        <!-- 如果需要分页器 -->
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+                <div class="ba-container" style="margin-bottom: 100px">
+                    <div class="ba-title">精彩视频</div>
+                    <div class="swiper-container" id="swiper3">
+                        <div class="swiper-wrapper">
+                            {loop $video $value}
+                            <div class="swiper-slide"><img src="{php echo tomedia($value['thumb'])}" data-url="{php echo mobileUrl('info/info/videoPlay',['id'=>$value['id']]);}" alt="" width="100%"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                            {/loop}
+                        </div>
+                        <!-- 如果需要分页器 -->
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--     <script src="../addons/ewei_shopv2/plugin/info/static/swipe/js/swiper.min.js"></script>
+ -->    <script>
+    $('title').text('个人中心');
+        require(['swiper2'], function (Swiper){
+        　　var mySwiper1 = new Swiper('#swiper1', {
+                loop: true, // 循环模式选项
+                autoplay:{
+                    delay:5000
+                },
+                // 如果需要分页器
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+                on:{
+                    click:function () {
+                        var index = this.activeIndex - 1;
+                        location.href = $("#swiper1 img").eq(index).data("url");
+                    }
+                }
+            })
+            var mySwiper2 = new Swiper('#swiper2', {
+                loop: true, // 循环模式选项
+                autoplay: {
+                    delay: 5000,//1秒切换一次
+                },
+                // 如果需要分页器
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+                on:{
+                    click:function () {
+                        var index = this.activeIndex - 1;
+                        location.href = $("#swiper2 img").eq(index).data("url");
+                    }
+                }
+            })
+            var mySwiper3 = new Swiper('#swiper3', {
+                loop: true, // 循环模式选项
+                autoplay:{
+                    delay:5000
+                },
+                // 如果需要分页器
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+                on:{
+                    click:function () {
+                        var index = this.activeIndex - 1;
+                        location.href = $("#swiper3 img").eq(index).data("url");
+                    }
+                }
+            })
+        });
+        // window.onload = function(){
+        //     var mySwiper1 = new Swiper('#swiper1', {
+        //         loop: true, // 循环模式选项
+
+        //         // 如果需要分页器
+        //         pagination: {
+        //             el: '.swiper-pagination',
+        //         },
+        //         on:{
+        //             click:function () {
+        //                 var index = this.activeIndex - 1;
+        //                 location.href = $("#swiper1 img").eq(index).data("url");
+        //             }
+        //         }
+        //     })
+        //     var mySwiper2 = new Swiper('#swiper2', {
+        //         loop: true, // 循环模式选项
+
+        //         // 如果需要分页器
+        //         pagination: {
+        //             el: '.swiper-pagination',
+        //         },
+        //         on:{
+        //             click:function () {
+        //                 var index = this.activeIndex - 1;
+        //                 location.href = $("#swiper2 img").eq(index).data("url");
+        //             }
+        //         }
+        //     })
+        //     var mySwiper3 = new Swiper('#swiper3', {
+        //         loop: true, // 循环模式选项
+
+        //         // 如果需要分页器
+        //         pagination: {
+        //             el: '.swiper-pagination',
+        //         },
+        //         on:{
+        //             click:function () {
+        //                 var index = this.activeIndex - 1;
+        //                 location.href = $("#swiper3 img").eq(index).data("url");
+        //             }
+        //         }
+        //     })
+        // }
+    </script>
+{template '_footer'}

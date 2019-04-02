@@ -1,0 +1,327 @@
+{template '_header'}
+<link rel="stylesheet" href="../addons/ewei_shopv2/plugin/info/static/css/font-awesome.min.css">
+<link rel="stylesheet" href="../addons/ewei_shopv2/plugin/info/static/mui/css/mui.min.css">
+<link rel="stylesheet" href="../addons/ewei_shopv2/plugin/info/static/css/iconfont.css">
+<link rel="stylesheet" href="../addons/ewei_shopv2/plugin/info/static/mui/css/mui.picker.min.css">
+<link rel="stylesheet" href="../addons/ewei_shopv2/plugin/info/static/mui/css/mui.poppicker.css">
+<link rel="stylesheet" href="../addons/ewei_shopv2/plugin/info/static/css/foxui.min.css">
+<link rel="stylesheet" href="../addons/ewei_shopv2/plugin/info/static/css/balance.css">
+    <div class='fui-page-group statusbar'>
+        <div class="fui-page">
+            <div class="fui-content">
+                <div class="reg-header">
+                    <img src="../addons/ewei_shopv2/plugin/info/static/img/reg-header.png" alt="" width="100%">
+                    <ul>
+                        <li class="on">手机验证</li>
+                        <li>个人信息</li>
+                        <li>购买情况</li>
+                    </ul>
+                </div>
+                <div class="fui-cell-group">
+                    <div class="fui-cell">
+                        <div class="fui-cell-label text-center">
+                            <i class="fa fa-mobile" aria-hidden="true"></i>
+                        </div>
+                        <div class="fui-cell-info pl-30 account-cell">
+                            <input type="tel" class="fui-input" name="mobile" id="mobile" placeholder="您的手机号码" value="" maxlength="11">
+                        </div>
+                    </div>
+                    <div class="fui-cell" id="cell-verifycode">
+                        <div class="fui-cell-label text-center">
+                            <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                        </div>
+                        <div class="fui-cell-info pl-30 account-cell"><input type="text" class="fui-input" name="verifycode" id="verifycode" placeholder="5位短信验证码" maxlength="5"></div>
+                        <div class="fui-cell-remark noremark"><a class="btn btn-default btn-default-o  btn-sm account-btn" id="btnCode">获取验证码</a></div>
+                    </div>
+                    <div class="fui-cell">
+                        <div class="fui-cell-info ">
+                            <div class="btn btn-default btn-default-p block account-btn" id="next-1">下一步</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fui-cell-group" style="display: none">
+                    <div class="fui-cell">
+                        <div class="fui-cell-label text-center">
+                            <i class="fa fa-user-o" aria-hidden="true"></i>
+                        </div>
+                        <div class="fui-cell-info pl-30 account-cell">
+                            <input type="text" class="fui-input" name="username" id="username" placeholder="请输入您的姓名" value="">
+                        </div>
+                    </div>
+                    <div class="fui-cell">
+                        <div class="fui-cell-label text-center">
+                            <i class="fa fa-transgender" aria-hidden="true"></i>
+                        </div>
+                        <div class="fui-cell-info pl-30 account-cell">
+                        	<label for="man">
+                        		男
+                            	<input type="radio" class="fui-radio fui-radio-success" name="sex" id="man" value="1">
+                        	</label>
+                            <label for="woman">
+                            	女
+                            	<input type="radio" class="fui-radio fui-radio-success" name="sex" id="woman" value="0">
+                        	</label>
+                        </div>
+                    </div>
+                    <div class="fui-cell">
+                        <div class="fui-cell-label text-center">
+                            <i class="fa fa-calendar-o" aria-hidden="true"></i>
+                        </div>
+                        <div class="fui-cell-info pl-30 account-cell">
+                            <div id="birthday" class="icon icon-sanjiao1">请选择您的出生日期</div>
+                        </div>
+                    </div>
+                    <div class="fui-cell">
+                        <div class="fui-cell-label text-center">
+                            <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                        </div>
+                        <div class="fui-cell-info pl-30 account-cell">
+                            <input type="tel" class="fui-input" name="age" id="age" placeholder="请输入您的年龄" value="">
+                        </div>
+                    </div>
+                    <div class="fui-cell">
+                        <div class="fui-cell-label text-center">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        </div>
+                        <div class="fui-cell-info pl-30 account-cell">
+                            <!-- <input type="text" class="fui-input" name="provinces" id="provinces" placeholder="请选择您的地址" value=""> -->
+                            <div id="provinces" class="icon icon-sanjiao1">请选择您的地址</div>
+                        </div>
+                    </div>
+                    <div class="fui-cell">
+                        <div class="fui-cell-label text-center">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        </div>
+                        <div class="fui-cell-info pl-30 account-cell">
+                            <input type="text" class="fui-input" name="address" id="address" placeholder="请输入详情地址" value="">
+                        </div>
+                    </div>
+                    <div class="fui-cell">
+                        <div class="fui-cell-info ">
+                            <div class="btn btn-default btn-default-p block account-btn" id="next-2">下一步</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fui-cell-group" style="display: none">
+                	<div class="fui-cell">
+                        <div class="fui-cell-label text-center">
+                            <i class="fa fa-cube" aria-hidden="true"></i>
+                        </div>
+                        <div class="fui-cell-info pl-30 account-cell">
+                            <input type="text" class="fui-input" name="goods" data-type="goods" id="goods" placeholder="您买的产品" value="">
+                        </div>
+                    </div>
+                    <div class="fui-cell">
+                        <div class="fui-cell-label text-center">
+                            <i class="fa fa-calendar-o" aria-hidden="true"></i>
+                        </div>
+                        <div class="fui-cell-info pl-30 account-cell">
+                            <!-- <input type="text" class="fui-input" name="date" id="date" placeholder="请选择您购买的日期" value=""> -->
+                            <div id="date" class="icon icon-sanjiao1">请选择您购买的日期</div>
+                        </div>
+                    </div>
+                    <div class="fui-cell">
+                        <div class="fui-cell-label text-center">
+                            <i class="icon icon-shop" aria-hidden="true"></i>
+                        </div>
+                        <div class="fui-cell-info pl-30 account-cell">
+                            <input type="text" class="fui-input" name="shop" data-type="shop" id="shop" placeholder="请输入您购买的门店" value="">
+                        </div>
+                    </div>
+                    <div class="fui-cell">
+                        <div class="fui-cell-label text-center">
+                            <i class="fa fa-user-o" aria-hidden="true"></i>
+                        </div>
+                        <div class="fui-cell-info pl-30 account-cell">
+                            <input type="text" class="fui-input" name="salesman" data-type="salesman"  id="salesman" placeholder="请输入销售人员的名字" value="">
+                        </div>
+                    </div>
+                    <div class="fui-cell">
+                        <div class="fui-cell-label text-center">
+                            <i class="fa fa-sticky-note-o" aria-hidden="true"></i>
+                        </div>
+                        <div class="fui-cell-info pl-30 account-cell">
+                            <input type="text" class="fui-input" name="history" data-type="history" id="history" placeholder="请输入您的病史（选填）" value="">
+                        </div>
+                    </div>
+                    <div class="fui-cell">
+                        <div class="fui-cell-info ">
+                            <div class="btn btn-default btn-default-p block account-btn" id="submit">提交</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../addons/ewei_shopv2/plugin/info/static/mui/js/mui.min.js"></script>
+    <script src="../addons/ewei_shopv2/plugin/info/static/mui/js/mui.picker.min.js"></script>
+    <script src="../addons/ewei_shopv2/plugin/info/static/mui/js/mui.poppicker.js"></script>
+    <script src="../addons/ewei_shopv2/plugin/info/static/mui/js/city.data-3.js"></script>
+    <script>
+		var userInfo = {};
+		var index = 0;
+
+		// 第一步
+		$("#mobile").on("change",function(){
+		})
+
+		$("#next-1").on("click",function(){
+			userInfo.phone = $.trim($("#mobile").val());
+			if(!(/^1[34578]\d{9}$/.test(userInfo.phone))){
+				FoxUI.alert("手机号输入错误！","提示",function(){
+				})
+				return;
+			}
+			var verifycode = $.trim($("#verifycode").val());
+			if(verifycode==''){
+				FoxUI.alert("请输入验证码","提示",function(){})
+				return;
+			}
+			$.get("{php echo mobileUrl('info/register/checkCode')}",{'mobile':userInfo.phone,'verifycode':verifycode},function(res){
+				if(res.status!='1'){
+					FoxUI.alert(res.result.message,"提示",function(){})
+					return false;
+				}
+				index = 1;
+				$(".reg-header ul li").removeClass('on').eq(index).addClass('on');
+				$(".fui-cell-group").hide().eq(index).show();
+			},'json');
+			
+		})
+		// 第二步
+
+		$("#username").on('change',function() {
+			userInfo.username = $(this).val();
+		});
+
+		$("input[name=sex]").click(function(){
+		    userInfo.sex = $(this).val();
+		});
+		$("#username").on('change',function() {
+			userInfo.username = $(this).val();
+		});
+		$("#age").on('change',function() {
+			userInfo.age = $(this).val();
+		});
+		$("#address").on('change',function() {
+			userInfo.addr = $(this).val();
+		});
+    	var dtPicker = new mui.DtPicker({
+            "type":"date",
+            beginDate: new Date(1980, 01, 01),//设置开始日期
+            endDate: new Date(2030, 01,01),//设置结束日期 
+        });  
+    	var birthday = document.getElementById("birthday");
+    	birthday.addEventListener("click",function () {
+    		var that = this;
+    	 	dtPicker.show(function(res){
+    	 		console.log(res.text);
+    	 		that.innerHTML = res.text;
+    	 		userInfo.birthtime = res.text;
+    	 	})
+    	})
+    	var cityPicker3 = new mui.PopPicker({layer: 3});
+		cityPicker3.setData(cityData3);
+    	var provinces = document.getElementById("provinces");
+    	provinces.addEventListener("click",function () {
+    		var that = this;
+    		cityPicker3.show(function(items) {
+    			console.log(items)
+    			that.innerHTML = items[0].text + " " + items[1].text + " " + items[2].text;
+    			userInfo.city = that.innerHTML;
+    		})
+    	})
+
+    	$("#next-2").on("click",function(){
+    		if(!userInfo.username){
+    			FoxUI.alert("请输入用户名","提示",function(){})
+				return;
+    		}
+    		if(!userInfo.sex){
+    			FoxUI.alert("请选择性别","提示",function(){})
+				return;
+    		}
+    		if(!userInfo.birthtime){
+    			FoxUI.alert("请输选择出生日期","提示",function(){})
+				return;
+    		}
+    		if(!userInfo.age){
+    			FoxUI.alert("请输入年龄","提示",function(){})
+				return;
+    		}
+    		if(!userInfo.city){
+    			FoxUI.alert("请输请选择省市区","提示",function(){})
+				return;
+    		}
+    		if(!userInfo.addr){
+    			FoxUI.alert("请输入详情地址","提示",function(){})
+				return;
+    		}
+    		index = 2;
+			$(".reg-header ul li").removeClass('on').eq(index).addClass('on');
+			$(".fui-cell-group").hide().eq(index).show();
+    	})
+    	// 第三步
+    	
+    	$("#goods").on("change",function(){
+    		userInfo.goodname = $(this).val();
+    	})
+    	$("#shop").on("change",function(){
+    		userInfo.buystore = $(this).val();
+    	})
+    	$("#salesman").on("change",function(){
+    		userInfo.sales = $(this).val();
+    	})
+    	$("#history").on("change",function(){
+    		userInfo.medical = $(this).val();
+    	})
+    	var dtPicker2 = new mui.DtPicker({
+            "type":"date",
+            beginDate: new Date(1980, 01, 01),//设置开始日期
+            endDate: new Date(2030, 01,01),//设置结束日期 
+        }); 
+    	var dtDate = document.getElementById("date");
+    	dtDate.addEventListener("click",function () {
+    		var that = this;
+    	 	dtPicker2.show(function(res){
+    	 		that.innerHTML = res.text;
+    	 		userInfo.buytime = res.text;
+    	 	})
+    	})
+    	$("#submit").on("click",function(){
+    		if(!userInfo.goodname){
+    			FoxUI.alert("请输入您购买的产品","提示",function(){})
+				return;
+    		}
+    		if(!userInfo.buytime){
+    			FoxUI.alert("请选择您购买的日期","提示",function(){})
+				return;
+    		}
+    		if(!userInfo.buystore){
+    			FoxUI.alert("请输入您购买的门店","提示",function(){})
+				return;
+    		}
+    		if(!userInfo.sales){
+    			FoxUI.alert("请输入销售人员的名字","提示",function(){})
+				return;
+    		}
+    		//发送请求
+    		$.post("{php echo mobileUrl('info/register/reg')}", {"data":userInfo}, function(res, textStatus, xhr) {
+    			if(res.status=='1'){
+					FoxUI.toast.show(res.result.message,location.href=res.result.url);
+					return false;
+				}
+				FoxUI.toast.show(res.result.message);
+    		},'json');
+    		
+    	})
+    </script>
+    <script language='javascript'>
+	require(['biz/member/register'], function (modal) {
+	  	modal.initBind({
+			endtime: {php echo intval($endtime)},
+			backurl: "{$_GPC['backurl']}"
+		});
+	});
+</script>
+{template '_footer'}

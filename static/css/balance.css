@@ -1,0 +1,121 @@
+ul,
+ol,
+li {
+  list-style: none;
+}
+.icon {
+  font-size: 20px;
+}
+.fa {
+  font-size: 20px;
+}
+.reg-header {
+  position: relative;
+}
+.reg-header ul {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  height: 35px;
+  background: linear-gradient(transparent, #886d56);
+}
+.reg-header ul li {
+  position: relative;
+  flex: 1;
+  color: #fff;
+  text-align: center;
+}
+.reg-header ul li.on::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-bottom-color: #fafafa;
+}
+.reg-header ul li + li {
+  font-size: 14px;
+  border-left: 1px solid #fff;
+}
+.btn.btn-default-p {
+  color: #fff;
+  border: 1px solid #0d7fd3;
+  background: #0d7fd3;
+}
+.fui-cell-group .fui-cell .pl-30 {
+  padding-left: 30px;
+  border-left: 1px solid #ebebeb;
+}
+.fui-cell-info > div.icon {
+  position: relative;
+  font-size: 12px;
+}
+.fui-cell-info > div.icon::before {
+  position: absolute;
+  right: 0;
+}
+.user-header {
+  position: relative;
+}
+.user-header .user-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14.0625rem;
+  height: 4.21875rem;
+  padding-left: 0.9rem;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.35);
+  box-sizing: border-box;
+}
+.user-header .user-info img {
+  margin-right: 0.5rem;
+  width: 2.34375rem;
+  height: 2.34375rem;
+  border-radius: 50%;
+}
+#set {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #999;
+  font-size: 15px;
+}
+.ba-container {
+  margin-bottom: 20px;
+}
+.ba-container .ba-title {
+  height: 1.4rem;
+  line-height: 1.4rem;
+  background-image: url("../img/title-bg.png");
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  text-align: center;
+  font-size: 16px;
+}
+.swiper-container img {
+  margin-top: 10px;
+  border-radius: 5px;
+}
+.btn-ba {
+  width: 5.640625rem;
+  border: 1px solid #000;
+  background-color: #fff;
+}
+#swiper3 .fa {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 60px;
+  color: #fff;
+  transform: translate(-50%, -50%);
+}

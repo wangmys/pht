@@ -1,0 +1,147 @@
+{template '_header'}
+<style type="text/css">
+	table th,td{text-align: center;}
+  .age{
+    display: table-cell;
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+    font-size: 12px;
+    height: 30px;
+    text-shadow: 0 0 0;
+    background-color: #FFFFFF;
+    background-image: none;
+    border: 1px solid #efefef;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  }
+</style>
+<div class="page-content"> 
+<form action="" method="get"> 
+<input type="hidden" name="c" value="site" /> 
+<input type="hidden" name="a" value="entry" /> 
+<input type="hidden" name="m" value="ewei_shopv2" /> 
+<input type="hidden" name="do" value="web" /> 
+<input type="hidden" name="r" value="info.index.lists" /> 
+<div class="page-toolbar"> 
+<!--  <div class="col-sm-6"> 
+  <a class="btn btn-primary btn-sm" href="{php echo webUrl('info.index.add')}"><i class="fa fa-plus"></i> 添加歌曲</a> 
+ </div>  -->
+ <div class="col-sm-6 pull-right">
+  <div class="input-group">
+    <span class="input-group-addon">
+          年龄
+      </span>
+      <input type="text" name="age1" class="age" name="age1">
+      <span class="input-group-addon">
+          岁 至 
+      </span>
+      <input type="text" name="age2" class="age" name="age2">
+      <span class="input-group-addon">
+          岁
+      </span>
+   <input type="text" class="input-sm form-control" name="keyword" value="{$keyword}" placeholder="姓名/门店" /> 
+   <span class="input-group-btn"> <button class="btn btn-primary" type="submit"> 搜索</button> </span> 
+  </div>
+
+ </div> 
+</div> 
+</form>
+{if !empty($info)}
+<div class="page-table-header"> 
+<input type="checkbox" /> 
+<div class="btn-group"> 
+ <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle="batch" data-href="{php echo webUrl('info/index/disable',array('status'=>'1'))}" disabled="disabled"> <i class="icow icow-qiyong"></i> 启用 </button> 
+ <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle="batch" data-href="{php echo webUrl('info/index/disable',array('status'=>'0'))}" disabled="disabled"> <i class="icow icow-jinyong"></i> 禁用 </button> 
+ <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle="batch-remove" data-confirm="确认要删除?" data-href="{php echo webUrl('info/index/delete')}" disabled="disabled"> <i class="icow icow-shanchu1"></i> 删除 </button> 
+</div> 
+</div> 
+<table class="table table-hover table-responsive"> 
+<thead> 
+ <tr> 
+  <th style="width:25px;"></th> 
+  <th style="width:125px">姓名</th> 
+  <th style="width:125px">性别</th> 
+  <th style="width:125px;">年龄</th>
+  <th style="width:125px;">出生日期</th>
+  <th style="width:125px;">手机号码</th>
+  <th style="width:125px;">购买商品</th>
+  <th style="width:125px;">购买时间</th>
+  <th style="width:125px;">购买门店</th>
+  <th style="width:125px;">销售人员</th>
+  <th style="width:125px;">病史</th>
+  <th style="width:125px;">操作</th>
+ </tr> 
+</thead> 
+<tbody>
+{loop $info $k $v} 
+ <tr> 
+	<td> <input type="checkbox" value="{$v['id']}" /> </td> 
+	<td>{$v['username']}</td> 
+	<td>
+      {if empty($v['sex']) || $v['sex']==0}
+        女
+      {else if $v['sex']==1}
+        男
+      {else if $v['sex']==2}
+        保密
+      {/if}
+</td> 
+	<td>{$v['age']}</td> 
+	<td>{php echo date('Y-m-d',$v['birthtime'])}</td>
+	<td>
+		{$v['phone']}
+	</td>
+
+
+	<td>
+		{$v['goodname']}
+	</td>
+	<td>
+       {php echo date('Y-m-d',$v['buytime'])}
+	</td>
+	<td>
+		{$v['buystore']}
+	</td>
+  <td>{$v['sales']}</td>
+	<td>{$v['medical']}</td>
+	<td> 
+	  	<a class="btn btn-default btn-sm btn-op btn-operation" href="{php echo webUrl('info/index/edit',array('id'=>$v['id']))}"> 
+	  		<span data-toggle="tooltip" data-placement="top" title="" data-original-title="编辑"> <i class="icow icow-dingdan2"></i> </span> 
+	  	</a> 
+	  	<a class="btn btn-default  btn-sm btn-op btn-operation" data-toggle="ajaxRemove" href="{php echo webUrl('info/index/delete',array('id'=>$v['id']))}" data-confirm="确认删除此歌曲吗？"> 
+	  		<span data-toggle="tooltip" data-placement="top" title="" data-original-title="删除"> 
+	  			<i class="icow icow-shanchu1"></i> 
+	  		</span> 
+	  	</a> 
+	</td> 
+ </tr>
+{/loop}
+</tbody> 
+<tfoot> 
+ <tr> 
+  <td><input type="checkbox" /></td> 
+  <td colspan="3" > 
+   <div class="btn-group" style="float: left;"> 
+    <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle="batch" data-href="{php echo webUrl('info/index/disable',array('status'=>'1'))}" disabled="disabled"> <i class="icow icow-qiyong" style="float: left;"></i> 启用 </button> 
+    <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle="batch" data-href="{php echo webUrl('info/index/disable',array('status'=>'0'))}" disabled="disabled"> <i class="icow icow-jinyong"></i> 禁用 </button> 
+    <button class="btn btn-default btn-sm btn-operation" type="button" data-toggle="batch-remove" data-confirm="确认要删除?" data-href="{php echo webUrl('info/index/delete')}" disabled="disabled"> <i class="icow icow-shanchu1"></i> 删除 </button> 
+   </div> </td> 
+  <td colspan="8" class="text-right" > 
+   <div>
+    <ul class="pagination pagination-centered">
+     <li><span class="nobg">{$pager}</span></li>
+    </ul>
+   </div>
+  </td> 
+ </tr> 
+</tfoot> 
+</table> 
+</div>
+{else}
+<div class="panel panel-default">
+    <div class="panel-body empty-data">未查询到相关信息</div>
+</div>
+{/if}
+{template '_footer'}

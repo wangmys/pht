@@ -1,0 +1,39 @@
+{template '_header'}
+<style type="text/css">
+	video{
+		width: 100%;
+		margin:1rem auto;
+	}
+</style>
+<script>document.title = "{$_W['shopset']['shop']['name']}"; </script>
+<link rel="stylesheet" href="../addons/ewei_shopv2/plugin/article/template/mobile/default/images/mobile.css" />
+<div class='fui-page  fui-page-current article-index-page'>
+
+	{if is_h5app()}
+	<div class="fui-header">
+		<div class="fui-header-left">
+			<a class="back"></a>
+		</div>
+		<div class="title">{$_W['shopset']['shop']['name']}</div>
+		<div class="fui-header-right"></div>
+	</div>
+	{/if}
+	<div class='fui-content'>
+		
+		<div class="fui-article-page">
+			<div class="fui-article-content">
+				<video autoplay="autoplay" name="media" muted="" controls="">
+				    <source src="{php echo tomedia($video['video_url'])}"
+				    type="video/mp4">
+				</video>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(window).click(function(){
+		$('video[name=media]')[0].play();
+	})
+</script>
+{template '_footer'}
+<!--yifuyuanma-->

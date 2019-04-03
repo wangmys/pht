@@ -27,7 +27,6 @@ class Info_EweiShopV2Page extends MobileLoginPage
 			if ($user_diyform_open == 1) {
 				$template_flag = 1;
 				$diyform_id = $set_config['user_diyform'];
-
 				if (!empty($diyform_id)) {
 					$formInfo = $diyform_plugin->getDiyformInfo($diyform_id);
 					$fields = $formInfo['fields'];

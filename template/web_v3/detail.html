@@ -1,0 +1,251 @@
+{template '_header'}
+<style type='text/css'>
+    .ordertable { width:100%;position: relative;margin-bottom:10px}
+    .ordertable tr td:first-child { text-align: right }
+    .ordertable tr td {padding:10px 5px 0;vertical-align: top}
+    .ordertable1 tr td { text-align: right; }
+    .ops .btn { padding:5px 10px;}
+    .order-container{
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+    .order-container-left{
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+    }
+    .order-container-static{
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        padding: 30px 50px 20px;
+    }
+    .font18{
+        font-size:20px;
+        font-weight:bold;;
+    }
+    .trbagpack span{
+        margin: 0 10px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .trbagpack span.address{
+        width:150px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+    }
+    tfoot .price{
+        float: right;
+    }
+    tfoot .price-inner{
+        display: inline-block;
+        vertical-align: middle;
+        width:100px;
+        text-align: right;
+    }
+    .packbag-group{
+        border:1px solid #efefef;
+    }
+    .packbag{
+        padding: 0 30px;
+    }
+    .packbag-title{
+    line-height: 33px;
+    }
+    .packbag-group .packbag-list{
+        padding: 20px 33px;
+        border-bottom: 1px solid #efefef;
+        display: flex;
+       align-items: center;
+    }
+    .packbag-list .packbag-media{
+        width:100px;
+    }
+    .packbag-list .packbag-inner{
+        border-left:1px solid #efefef;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+    }
+    .packbag-goods-list{
+        display: flex;
+        flex-wrap: wrap;
+        width:100%;
+    }
+    .packbag-goods{
+        width:25%;
+        display: flex;
+        display: -webkit-flex;
+        margin: 10px 0 5px;
+    }
+    .packbag-goods-media{
+        width:52px;
+        height: 52px;
+        margin-right: 10px;
+    }
+   .packbag-goods-media img{
+       width:52px;
+       height: 52px;
+       border: 1px solid #efefef;
+    }
+    .packbag-goods-inner{
+        flex:1;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        overflow: hidden;
+    }
+    .packbag-goods-inner p{
+    color: #999;
+    }
+    .packbag-goods-inner .title{
+        width:100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .table .trorder td{
+        border-right:1px solid #efefef;
+    }
+    .table .trorder td:nth-of-type(1){
+        border:none;
+    }
+</style>
+<div class="page-header">
+    当前位置：<span class="text-primary">用户详情</span>
+</div>
+<div class="page-content">
+    <h3 class="order-title">详细信息</h3>
+    <table class="table ">
+        <thead>
+            <tr class="trorder" style="background: #fff">
+                <th class="" style="width: 10%;text-align: center;">
+                    姓名
+                </th>
+                <th style="width: 1px;"></th>
+                <th class="" style="width: 10%;text-align: center">
+                    性别
+                </th>
+                <th style="text-align: center;width: 8%">
+                    年龄
+                </th>
+                <th style="text-align: center;width: 10%">
+                    出生日期
+                </th>
+                <th style="text-align: center;width: 10%">
+                    电话号码
+                </th>
+                {if empty($custom)}
+                <th style="text-align: center;width: 20%">
+                    购买商品/购买时间/购买门店
+                </th>
+                <th style="text-align: center;width: 10%">
+                    销售人员
+                </th>
+                <th style="text-align: center;width: 10%">
+                    病史
+                </th>
+                {/if}
+                <th style="text-align: center;width: 20%">
+                    地址/详细地址
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="trorder" style="background: #fff">
+                <td style="text-align: center">
+                    <p>
+                         {$data['username']}
+                    </p>
+                </td>
+                <td></td>
+                <td style="min-width: 300px;text-align: center;">
+                    {if $data['sex']=='0'}
+                        女
+                    {else if $data['sex']=='1'}
+                        男
+                    {else}
+                        保密
+                    {/if}
+                </td>
+                <td style="text-align: center">
+                   {$data['age']}
+                </td>
+                <td style="text-align: center">
+                    <p>
+                         {php echo date('Y-m-d',$data['birthtime'])}
+                    </p>
+                </td>
+                <td style="text-align: center">
+                    <p>
+                       {$data['phone']}
+                    </p>
+                </td>
+                {if empty($custom)}
+                <td style="text-align: center">
+                    {if empty($data['goodname']) || empty($data['buytime']) || empty($data['buystore'])}
+                    
+                    {else}
+                    <p>
+                       {$data['goodname']}/{if !empty($data['buytime'])}{php echo date('Y-m-d',$data['buytime'])}{/if}/{$data['buystore']}
+                    </p>
+                    {/if}
+                </td>
+
+                <td style="text-align: center">
+                    <p>
+                       {$data['sales']}
+                    </p>
+                </td>
+                <td style="text-align: center">
+                    <p>
+                       {$data['medical']}
+                    </p>
+                </td>
+                {/if}
+                <td style="text-align: center">
+                    <!-- <p>
+                        <span style="float: left;">省/市/区:</span>{$data['province']} {$data['city']} {$data['area']}
+                    </p>
+                    <p>
+                      <span style="float: left;">详细地址:</span> {$data['addr']}
+                    </p> -->
+                    <p>{$data['province']} {$data['city']} {$data['area']}  /  {$data['addr']} </p>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot style="padding-top: 20px">
+            <tr class="trorder">
+                <td colspan="2" style="padding-left: 20px;text-align: center;">
+                    其他信息
+                </td>
+                <td colspan="{if empty($custom)}8{else}5{/if}" style="padding-right: 60px">
+                    <div class="price">
+                        {if !empty($custom)}
+                        {loop $custom $key $val}
+                        <p>
+                            <span class="price-inner">
+                                {$key}：
+                            </span>
+                            {$val}
+                        </p>
+                        {/loop}
+                        {else}
+                        无
+                        {/if}
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+{template '_footer'}
+
+<!--青岛易联互动网络科技有限公司-->

@@ -137,7 +137,8 @@ class Bind_EweiShopV2Page extends MobileLoginPage
 			$endtime = 0;
 		}
 		else {
-			$endtime = 60 - time() - $sendtime;
+
+			$endtime = 60 + $sendtime - time();
 		}
 
 		include $this->template();

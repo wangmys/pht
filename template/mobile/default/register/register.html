@@ -30,7 +30,7 @@
                         <div class="fui-cell-label text-center">
                             <i class="fa fa-commenting-o" aria-hidden="true"></i>
                         </div>
-                        <div class="fui-cell-info pl-30 account-cell"><input type="text" class="fui-input" name="verifycode" id="verifycode" placeholder="5位短信验证码" maxlength="5"></div>
+                        <div class="fui-cell-info pl-30 account-cell"><input type="number" class="fui-input" name="verifycode" id="verifycode" placeholder="5位短信验证码" maxlength="5"  onkeydown="if(this.value.length>=5){this.value=this.value.substr(0,4)}"></div>
                         <div class="fui-cell-remark noremark"><a class="btn btn-default btn-default-o  btn-sm account-btn" id="btnCode">获取验证码</a></div>
                     </div>
                     <div class="fui-cell">
@@ -102,6 +102,7 @@
                         </div>
                     </div>
                 </div>
+                {if empty($template_flag)}
                 <div class="fui-cell-group" style="display: none">
                 	<div class="fui-cell">
                         <div class="fui-cell-label text-center">
@@ -150,6 +151,9 @@
                         </div>
                     </div>
                 </div>
+                {else}
+                   {template 'diyform/formfields1'}
+                {/if}
             </div>
         </div>
     </div>
@@ -158,9 +162,9 @@
     <script src="../addons/ewei_shopv2/plugin/info/static/mui/js/mui.poppicker.js"></script>
     <script src="../addons/ewei_shopv2/plugin/info/static/mui/js/city.data-3.js"></script>
     <script>
+        var title = {$title};
 		var userInfo = {};
 		var index = 0;
-
 		// 第一步
 		$("#mobile").on("change",function(){
 		})
@@ -262,7 +266,7 @@
 			$(".fui-cell-group").hide().eq(index).show();
     	})
     	// 第三步
-    	
+    	{if empty($template_flag)}
     	$("#goods").on("change",function(){
     		userInfo.goodname = $(this).val();
     	})
@@ -288,7 +292,10 @@
     	 		userInfo.buytime = res.text;
     	 	})
     	})
+        {/if}
     	$("#submit").on("click",function(){
+            
+            {if empty($template_flag)}
     		if(!userInfo.goodname){
     			FoxUI.alert("请输入您购买的产品","提示",function(){})
 				return;
@@ -305,15 +312,39 @@
     			FoxUI.alert("请输入销售人员的名字","提示",function(){})
 				return;
     		}
+            {else}
+            require(['biz/plugin/diyform'], function(diyform) {
+                postdata = diyform.getData('.diyform-container');
+                if (postdata) {
+                    var i;
+                    var t;
+                    var custom = {};
+                    for(i in postdata){
+                        t = $(title[i]).attr('tp_name');
+                        if(postdata[i]=='' || postdata[i]==undefined) continue;
+                        custom[t] = postdata[i];
+                    }
+                    userInfo['custom'] = custom;
+                }
+                //发送请求
+                $.post("{php echo mobileUrl('info/register/reg')}", {"data":userInfo}, function(res, textStatus, xhr) {
+                    if(res.status=='1'){
+                        FoxUI.toast.show(res.result.message,location.href=res.result.url);
+                        return false;
+                    }
+                    FoxUI.toast.show(res.result.message);
+                },'json');
+            })
+            return false;
+            {/if}
     		//发送请求
-    		$.post("{php echo mobileUrl('info/register/reg')}", {"data":userInfo}, function(res, textStatus, xhr) {
-    			if(res.status=='1'){
-					FoxUI.toast.show(res.result.message,location.href=res.result.url);
-					return false;
-				}
-				FoxUI.toast.show(res.result.message);
-    		},'json');
-    		
+            $.post("{php echo mobileUrl('info/register/reg')}", {"data":userInfo}, function(res, textStatus, xhr) {
+                if(res.status=='1'){
+                    FoxUI.toast.show(res.result.message,location.href=res.result.url);
+                    return false;
+                }
+                FoxUI.toast.show(res.result.message);
+            },'json');
     	})
     </script>
     <script language='javascript'>

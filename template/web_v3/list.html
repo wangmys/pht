@@ -66,6 +66,8 @@
   <th style="width:125px;">年龄</th>
   <th style="width:125px;">出生日期</th>
   <th style="width:125px;">手机号码</th>
+<!--   <th style="width:200px;">地址</th>
+  <th style="width:125px;">详细地址</th> -->
   <th style="width:125px;">购买商品</th>
   <th style="width:125px;">购买时间</th>
   <th style="width:125px;">购买门店</th>
@@ -93,13 +95,19 @@
 	<td>
 		{$v['phone']}
 	</td>
-
+<!--   <td>
+    {$v['province']} {$v['city']} {$v['area']}
+  </td>
+  <td>
+    {$v['addr']}
+  </td> -->
 
 	<td>
 		{$v['goodname']}
 	</td>
-	<td>
+	<td> {if !empty($v['buytime'])}
        {php echo date('Y-m-d',$v['buytime'])}
+       {/if}
 	</td>
 	<td>
 		{$v['buystore']}
@@ -107,10 +115,10 @@
   <td>{$v['sales']}</td>
 	<td>{$v['medical']}</td>
 	<td> 
-	  	<a class="btn btn-default btn-sm btn-op btn-operation" href="{php echo webUrl('info/index/edit',array('id'=>$v['id']))}"> 
-	  		<span data-toggle="tooltip" data-placement="top" title="" data-original-title="编辑"> <i class="icow icow-dingdan2"></i> </span> 
+	  	<a class="btn btn-default btn-sm btn-op btn-operation" href="{php echo webUrl('info/index/detail',array('id'=>$v['id']))}"> 
+	  		<span data-toggle="tooltip" data-placement="top" title="" data-original-title="查看详情"> <i class="icow icow-dingdan2"></i> </span> 
 	  	</a> 
-	  	<a class="btn btn-default  btn-sm btn-op btn-operation" data-toggle="ajaxRemove" href="{php echo webUrl('info/index/delete',array('id'=>$v['id']))}" data-confirm="确认删除此歌曲吗？"> 
+	  	<a class="btn btn-default  btn-sm btn-op btn-operation" data-toggle="ajaxRemove" href="{php echo webUrl('info/index/delete',array('id'=>$v['id']))}" data-confirm="确认删除此信息吗？"> 
 	  		<span data-toggle="tooltip" data-placement="top" title="" data-original-title="删除"> 
 	  			<i class="icow icow-shanchu1"></i> 
 	  		</span> 

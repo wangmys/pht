@@ -13,6 +13,7 @@ return array(
 		'items'     => array(
 			array('title' => '幻灯片管理', 'route' => 'adv'),
 			array('title' => '信息列表', 'route' => 'index.lists'),
+			array('title' => '信息列表', 'route' => 'index.users'),
 			array(
 				'title'  => '个人中心',
 				'route'  => '',
@@ -23,14 +24,14 @@ return array(
 						array('title' => '产品介绍', 'route' => 'product')
 					)
 				),
-			array('title' => '企业介绍', 'route' => 'business'),
+			// array('title' => '企业介绍', 'route' => 'business'),
 			array(
 				'title'  => '其他设置',
 				'route'  => '',
 				'extend' => '',
 				'items'  => array(
 						array('title' => '入口设置', 'route' => 'cover'),
-						array('title' => '注册信息设置', 'route' => 'cover.regset')
+						// array('title' => '注册设置', 'route' => 'diyform.diyform.temp')
 					)
 				)
 			)
